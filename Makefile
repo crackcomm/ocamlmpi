@@ -3,8 +3,8 @@ OCAMLFLAGS=-g -bin-annot
 OCAMLOPT=ocamlopt
 OCAMLDEP=ocamldep
 
-MPIINCDIR=$(shell pkg-config --variable=includedir mpich)
-MPILIBDIR=$(shell pkg-config --variable=libdir mpich)
+MPIINCDIR=$(MPI_PATH)/include
+MPILIBDIR=$(MPI_PATH)/lib
 MPICC=mpicc
 MPIRUN=mpirun
 

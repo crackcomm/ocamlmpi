@@ -79,7 +79,11 @@ value caml_mpi_init(value arguments)
   argv[i] = NULL;
   MPI_Init(&argc, &argv);
   /* Register an error handler */
-#if MPI_VERSION >= 2
+#if MPI_VERSION >= 3
+  MPI_Comm_create_errhandler(
+	  (MPI_User_function *)caml_mpi_error_handler, &hdlr);
+  MPI_Comm_set_errhandler(MPI_COMM_WORLD, hdlr);
+#elif MPI_VERSION >= 2
   MPI_Comm_create_errhandler(
 	  (MPI_Handler_function *)caml_mpi_error_handler, &hdlr);
   MPI_Comm_set_errhandler(MPI_COMM_WORLD, hdlr);
